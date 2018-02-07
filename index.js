@@ -7,6 +7,10 @@ const app = express();
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+app.get('/api/hello', (req,res)=>{
+  res.json({message:'hello world!'})
+})
+
 // Put all API endpoints under '/api'
 // app.get('/api/passwords', (req, res) => {
 //   const count = 5;
@@ -31,4 +35,4 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+console.log(`listening on ${port}`);
