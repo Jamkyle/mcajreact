@@ -1,0 +1,21 @@
+.progress{
+  display: inline-block;
+  position: relative;
+  background: #edefed;
+  border-radius: 10px;
+  &-bar{
+      background-color: $blue;
+      border-radius: 10px;
+      height: 8px;
+      transition: 200ms;
+  }
+  &--container{
+    margin: auto;
+    text-align: left;
+    width: 70%;
+    & span {
+      margin-left: 5%;
+      font-size: 0.7vw;
+    }
+  }
+}
