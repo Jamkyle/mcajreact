@@ -1,29 +1,38 @@
+
+
 .formSelect {
-  vertical-align: middle;
-  display: inline-block;
   position: relative;
+  display: inline-block;
   height: 100%;
   width: 33%;
-  background: url('../assets/img/carret.png') no-repeat 96% center;
-  background-size: 0.7em;
   background-color: $blue;
   border-radius: 50px;
+
   & select{
-    position: absolute;
+    @include font("Circular Air-Black", null, null, null);
+    display: inline-block;
+    letter-spacing: 1.1px;
     width: 83%;
-    -webkit-appearance : none;
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
     background: transparent;
-    padding: 10px 10px 10px 5px;
+    padding: 7px;
     border: none;
-    @include font("Circular Air-Black", 0.9em, null, white)
-      &:focus{
-        outline: none;
-      }
+    color :white;
+    &:focus{
+      outline: none;
+    }
+    &.addCarret{
+      background: url('../assets/img/carret.png') no-repeat 96% center;
+      background-size: 0.7em;
+    }
     @include pointer;
   }
   & img{
-    padding: 10px 0 10px 5px;
-    margin-left: 10%;
+    vertical-align: middle;
+    // padding: 10px 0 10px 5px;
+    margin-left: 8%;
     height: 0.9em;
     display: inline-block;
   }
@@ -34,25 +43,87 @@
     @include font("Circular Air-Book", null, null, null);
   }
   &-black{
-    @include font("Circular Air-Black", null, 700, null);
+    @include font("Circular Air-Black", null, null, null);
+  }
+  &-bold{
+    @include font("Circular Air-Bold", null, null, null);
   }
 }
 
 .destination{
   display: inline-block;
   width: 33%; //comment pour aligné a gauche
-  text-align: center;
+  // text-align: center;
   & .orly{
     position: relative;
     height: 1.4em;
     vertical-align: middle;
   }
   & span {
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 }
 
 .sens{
   font-size: 0;
   height: 17px;
+  & > * {
+    display: inline-block;
+  }
+}
+
+.left-add{
+  display: inline-block;
+  text-align: center;
+  @include font("Circular Air-Book", 0.7em, null, $grey);
+  & > span{
+    margin: auto;
+  }
+}
+
+.TextInput{
+  padding: 0;
+  width: 47%;
+  position: relative;
+  overflow: hidden;
+  text-align: right;
+  display: inline-block;
+  border: solid 1px #d2d5d0;
+  background: #edefed;
+  & > input {
+    text-align: left;
+    margin: 0;
+    border: none;
+    padding: 0.5em;
+    outline: none;
+    width: 100%;
+    &.add{
+      display: inline-block;
+      width: 82%;
+    }
+  }
+}
+input{
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #efefef;
+  opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: #efefef;
+  }
+
+  &::-ms-input-placeholder { /* Microsoft Edge */
+      color: #efefef;
+  }
+}
+
+.itemForm{
+  height: 35px;
+}
+
+.alone{
+  display: block;
+  margin: auto;
+  width : 10vw
 }

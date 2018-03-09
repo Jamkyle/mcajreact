@@ -2,3 +2,12 @@ $darkblue : #354b5d;
 $blue: #99cbf1;
 $red: #ff4747;
 $grey: #82898d;
+
+.font-color{
+  &--darkblue{
+    color: $darkblue
+  }
+  &--blue{
+    color : $blue
+  }
+}

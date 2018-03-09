@@ -1,12 +1,29 @@
+.font-color--darkblue {
+  color: #354b5d; }
+
+.font-color--blue {
+  color: #99cbf1; }
+
+@font-face {
+  font-family: "Circular Air-Bold";
+  src: url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.eot?") format("eot"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.ttf") format("truetype"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.woff") format("woff"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.svg#Circular_Air-Bold") format("svg"); }
+
+@font-face {
+  font-family: "Circular Air-Book";
+  src: url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.eot?") format("eot"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.ttf") format("truetype"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.woff") format("woff"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.svg#Circular_Air-Book") format("svg"); }
+
+@font-face {
+  font-family: "Circular Air-Black";
+  font-weight: 400;
+  src: url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.eot?") format("eot"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.ttf") format("truetype"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.woff") format("woff"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.svg#Circular_Air-Black") format("svg"); }
+
 html {
   height: 100%;
   width: 100%; }
 
 body {
-  letter-spacing: 1.2px;
   margin: 0;
   padding: 0;
-  font-family: "Circular Air-Black", sans-serif;
   height: 100%;
   width: 100%; }
 
@@ -44,9 +61,6 @@ body {
   right: 0;
   margin: 0 5px; }
 
-.pointer {
-  cursor: pointer; }
-
 .container {
   position: relative;
   top: 4.5%;
@@ -63,7 +77,7 @@ body {
     top: 50%;
     transform: translateY(-50%); }
     .container__body .sentence {
-      font-family: "Circular Air-Black", sans-serif;
+      font-family: "Circular Air-Bold", sans-serif;
       font-weight: 700;
       font-size: 3.5vw;
       color: white; }
@@ -75,7 +89,7 @@ body {
       text-align: left; }
       .container__body .tabForm li {
         font-family: "Circular Air-Book", sans-serif;
-        font-size: 1.5em;
+        font-size: x-large;
         color: white;
         cursor: pointer;
         position: relative;
@@ -83,13 +97,13 @@ body {
         left: 0;
         margin-right: 7%; }
         .container__body .tabForm li.active {
-          font-family: "Circular Air-Black", sans-serif;
-          font-size: 1.5em;
+          font-family: "Circular Air-Bold", sans-serif;
+          font-size: x-large;
           color: white;
-          font-weight: 700;
-          border-bottom: 2px solid white; }
+          border-bottom: 0.14em solid white; }
   .container__bottom {
     position: relative;
+    letter-spacing: 1.2px;
     top: 5em;
     text-align: center; }
     .container__bottom__inner {
@@ -99,6 +113,7 @@ body {
       text-align: left;
       top: 2em; }
       .container__bottom__inner > * {
+        vertical-align: middle;
         transition: 200ms;
         margin-right: 4%; }
         .container__bottom__inner > *:last-child {
@@ -117,7 +132,10 @@ body {
   color: white; }
 
 .right {
-  font-size: 0.8em;
+  font-family: "Circular Air-Black", sans-serif;
+  font-weight: 700;
+  font-size: 0.7em;
+  color: white;
   float: right;
   min-width: 100px;
   text-align: right;
@@ -128,7 +146,7 @@ body {
     cursor: pointer; }
   .right > img {
     height: 1.1em;
-    margin: 0 10px 0 0; }
+    margin: 0 15px 0 0; }
 
 .TopPage {
   background: url("../assets/img/bgvroomcab.jpg") 100% 0% no-repeat;
@@ -140,32 +158,35 @@ body {
   left: 0;
   background-color: rgba(62, 107, 141, 0.75); }
 
-.langage {
+.language {
   color: #354b5d; }
 
-.button {
-  vertical-align: bottom;
-  text-align: center;
-  display: inline-block;
-  padding: 9px;
-  background-color: #ff4747;
-  color: white;
-  border: none;
-  cursor: pointer; }
-
 .round-droit {
-  border-radius: 50px; }
+  border-radius: 50px !important; }
 
 .round {
   border-radius: 50%;
-  height: 17px;
-  width: 17px; }
+  height: 1.2em;
+  width: 1.2em; }
 
 .price {
-  right: 0; }
+  right: 0;
+  width: 70px; }
 
 .hidden {
   display: none; }
+
+#googleSignIn li {
+  display: block;
+  list-style: none;
+  height: 50px; }
+
+#googleSignIn button {
+  display: flex;
+  height: 40px; }
+  #googleSignIn button .firebaseui-idp-icon-wrapper img {
+    height: 30px;
+    width: 30px; }
 
 .progress {
   display: inline-block;
@@ -186,31 +207,33 @@ body {
       font-size: 0.7vw; }
 
 .formSelect {
-  vertical-align: middle;
-  display: inline-block;
   position: relative;
+  display: inline-block;
   height: 100%;
   width: 33%;
-  background: url("../assets/img/carret.png") no-repeat 96% center;
-  background-size: 0.7em;
   background-color: #99cbf1;
   border-radius: 50px; }
   .formSelect select {
-    position: absolute;
+    font-family: "Circular Air-Black", sans-serif;
+    display: inline-block;
+    letter-spacing: 1.1px;
     width: 83%;
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: transparent;
-    padding: 10px 10px 10px 5px;
+    padding: 7px;
     border: none;
-    font-family: "Circular Air-Black", sans-serif;
-    font-size: 0.9em;
     color: white;
     cursor: pointer; }
     .formSelect select:focus {
       outline: none; }
+    .formSelect select.addCarret {
+      background: url("../assets/img/carret.png") no-repeat 96% center;
+      background-size: 0.7em; }
   .formSelect img {
-    padding: 10px 0 10px 5px;
-    margin-left: 10%;
+    vertical-align: middle;
+    margin-left: 8%;
     height: 0.9em;
     display: inline-block; }
 
@@ -218,20 +241,81 @@ body {
   font-family: "Circular Air-Book", sans-serif; }
 
 .font-black {
-  font-family: "Circular Air-Black", sans-serif;
-  font-weight: 700; }
+  font-family: "Circular Air-Black", sans-serif; }
+
+.font-bold {
+  font-family: "Circular Air-Bold", sans-serif; }
 
 .destination {
   display: inline-block;
-  width: 33%;
-  text-align: center; }
+  width: 33%; }
   .destination .orly {
     position: relative;
     height: 1.4em;
     vertical-align: middle; }
   .destination span {
-    vertical-align: middle; }
+    vertical-align: bottom; }
 
 .sens {
   font-size: 0;
   height: 17px; }
+  .sens > * {
+    display: inline-block; }
+
+.left-add {
+  display: inline-block;
+  text-align: center;
+  font-family: "Circular Air-Book", sans-serif;
+  font-size: 0.7em;
+  color: #82898d; }
+  .left-add > span {
+    margin: auto; }
+
+.TextInput {
+  padding: 0;
+  width: 47%;
+  position: relative;
+  overflow: hidden;
+  text-align: right;
+  display: inline-block;
+  border: solid 1px #d2d5d0;
+  background: #edefed; }
+  .TextInput > input {
+    text-align: left;
+    margin: 0;
+    border: none;
+    padding: 0.5em;
+    outline: none;
+    width: 100%; }
+    .TextInput > input.add {
+      display: inline-block;
+      width: 82%; }
+
+input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #efefef;
+  opacity: 1;
+  /* Firefox */ }
+
+input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #efefef; }
+
+input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #efefef; }
+
+.itemForm {
+  height: 35px; }
+
+.alone {
+  display: block;
+  margin: auto;
+  width: 10vw; }
+
+.Modal--Title {
+  font-size: 1.5em;
+  color: #99cbf1; }
+
+.backdrop {
+  background-color: rgba(3, 24, 90, 0.4); }

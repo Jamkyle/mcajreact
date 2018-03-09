@@ -1,18 +1,16 @@
 import React, {Component} from 'react'
-import Progressbar from './Progressbar'
+import PropTypes from 'prop-types'
+import { auth, firebase } from '../Module/Firebase';
 
 
 class Modal extends Component {
-  state = { ratio:0, nbPlace :0}
-  add = () => {
-    fetch('/add')
-    .then(res => res.json())
-    .then(res => {
-      this.setState( res );
-    });
+  componentDidMount(){
+    if ( this.props.option === 'auth' && this.props.show ) {
+      firebase.ui.start('#googleSignIn', auth.uiConfig);
+    }
   }
+
   render(){
-    const {ratio, nbPlace} =  this.state
     // Render nothing if the "show" prop is false
     if(!this.props.show) {
       return null;
@@ -25,8 +23,6 @@ class Modal extends Component {
             <span className='modal--close pointer hidden' onClick={this.props.onClose}>
               x
             </span>
-          <Progressbar ratio={ratio} place={ nbPlace }/>
-          <span onClick={ this.add } style={pointer}>add</span>
         </div>
       </div>
     );
@@ -40,12 +36,10 @@ const backdropStyle = {
   bottom: 0,
   left: 0,
   right: 0,
-  backgroundColor: 'rgba(109,119,127,0.4)',
+  
   padding: 50
 };
-const pointer = {
-  cursor:'pointer'
-}
+
 // The modal "window"
 const modalStyle = {
   position: 'relative',
@@ -55,7 +49,12 @@ const modalStyle = {
   maxWidth: '51.6%',
   minHeight: '64.2%',
   margin: '0 auto',
-  padding: 30
+  padding: '30px 50px',
 };
+
+Modal.proptypes = {
+  show : PropTypes.boolean,
+  option: PropTypes.string
+}
 
 export default Modal

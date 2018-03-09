@@ -1,27 +1,56 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser')
+var nbCars = 2
+
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+let totalPlace = 4 * nbCars
 let current = 0
+let places = [1,2,3,4]
+
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('/add', (req, res)=>{
-    current < 4 ? current = current + 1 : current = 0;
-    res.json({ ratio : current/4*100, nbPlace : current })
-    console.log('you are adding something '+current);
-})
+app.get('/api/ASK_PLACES', (req, res)=>{
+  places = fillSelect()
+  res.json({ selPlaces : places })
+});
+app.post('/api/SEND_DATA', (req, res) => {
+  current = current + parseInt(req.body.place)
+  current > totalPlace ? current = 0 : current = current
+  value = ( current / totalPlace ) * 100
 
+    res.json({ ratio : value, nbPlace : placeRest(current, totalPlace), selPlaces : fillSelect() })
+});
 app.get('/api/hello', (req,res)=>{
-  res.json({message:'hello world!'})
+  res.json({ message:'hello world!' })
+});
+app.get('/api/progress', (req, res) => {
+  value = ( current / totalPlace ) * 100
+  res.json({ ratio : value, nbPlace : placeRest(current, totalPlace), totalPlace : totalPlace })
 });
 
-app.get('/api/progress', (req, res) => {
-  let value
-  value = current/4*100
-  res.json({ ratio : value, nbPlace : current })
-});
+function fillSelect(){
+  places = []
+  if ( placeRest(current, totalPlace) > 4 )
+    places = [1,2,3,4]
+  else{
+    for (i = 0; i < placeRest(current, totalPlace) ; i++)
+      places.push( i + 1 );
+  }
+  if(placeRest(current, totalPlace) === 0 )
+    places = [0]
+  return places
+}
+
+function placeRest( current, totalPlace ){
+  return totalPlace - current
+}
 
 // Put all API endpoints under '/api'
 // app.get('/api/passwords', (req, res) => {

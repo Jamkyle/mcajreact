@@ -5,13 +5,12 @@ html {
   width: 100%;
 }
 body {
-  letter-spacing: 1.2px;
   margin: 0;
   padding: 0;
-  font-family: "Circular Air-Black", sans-serif;
   height: 100%;
   width: 100%;
 }
+
 #root{
   height: 100%;
   width: 100%;
@@ -54,10 +53,6 @@ body {
   }
 }
 
-.pointer{
-  cursor: pointer
-}
-
 .container{
   position: relative;
   top: 4.5%;
@@ -73,7 +68,7 @@ body {
   &__body{
     @include center;
     & .sentence {
-      @include font("Circular Air-Black", 3.5vw, 700, white)
+      @include font("Circular Air-Bold", 3.5vw, 700, white)
     }
     & .tabForm{
       display: block;
@@ -81,32 +76,33 @@ body {
       position: relative;
       list-style: none;
       text-align: left;
-
       & li {
-        @include font("Circular Air-Book", 1.5em, null, white)
+        @include font("Circular Air-Book", x-large, null, white)
         @include pointer;
         position: relative;
         display: inline-block;
         left: 0;
         margin-right: 7%;
         &.active{
-          @include font("Circular Air-Black", 1.5em, null, white)
-          font-weight: 700;
-          border-bottom: 2px solid white;
+          @include font("Circular Air-Bold", x-large, null, white)
+          border-bottom: 0.14em solid white;
         }
       }
     }
   }
   &__bottom{
     position: relative;
+    letter-spacing: 1.2px;
     top: 5em;
     text-align: center;
     &__inner{
       position: relative;
       @include font("Circular Air-Book", null, null, white)
       text-align: left;
+      // height: 2em; //a enlever
       top:2em;
       & > * {
+        vertical-align: middle;
         transition: 200ms;
         margin-right: 4%;
         &:last-child{
@@ -130,7 +126,7 @@ body {
 }
 
 .right{
-  font-size: 0.8em;
+  @include font("Circular Air-Black", 0.7em, 700, white);
   & > * {
     cursor: pointer;
   }
@@ -140,7 +136,7 @@ body {
   @include center
   & > img{
     height: 1.1em;
-    margin: 0 10px 0 0
+    margin: 0 15px 0 0
   }
 }
 
@@ -157,35 +153,63 @@ body {
   background-color: rgba(62,107,141,0.75)
 }
 
-.langage{
-  color: $darkblue
+.language{
+  color: $darkblue;
 }
 
 .button{
-  vertical-align: bottom;
-  text-align: center;
-  display: inline-block;
-  padding: 9px;
-  background-color: $red;
-  color: white;
-  border: none;
-  @include pointer;
+  // border : none!important;
+  // box-shadow: 0.5px 0.5px 0px #b14a4e;
+}
+
+.button{
+  // outline: none;
+  // text-align: center;
+  // display: inline-block;
+  // padding: 8.2px;
+  // background-color: $red;
+  // color: white;
+  // @include pointer;
+  //
+  // & > *{
+  //   vertical-align: text-top;
+  // }
 }
 
 .round-droit{
-  border-radius: 50px;
+  border-radius: 50px!important;
 }
 
 .round{
   border-radius: 50%;
-  height: 17px;
-  width: 17px;
-}
-.price{
-  right: 0;
+  height: 1.2em;
+  width: 1.2em;
 }
 
+.price{
+  right: 0;
+  width: 70px;
+}
 
 .hidden{
   display: none
+}
+
+#googleSignIn{
+  & li{
+    display: block;
+    list-style: none;
+    height: 50px;
+  }
+
+  & button{
+    display: flex;
+    height: 40px;
+    & .firebaseui-idp-icon-wrapper{
+      & img{
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
 }

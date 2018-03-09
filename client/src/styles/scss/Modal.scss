@@ -1,0 +1,10 @@
+@import 'mixin';
+.Modal{
+  &--Title{
+    font-size: 1.5em;
+    color : $blue;
+  }
+}
+.backdrop {
+  background-color: rgba(3,24,90,0.4)
+}

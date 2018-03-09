@@ -1,95 +1,129 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import position from '../styles/assets/img/Forme 1.png'
-import carret from '../styles/assets/img/carret.png'
 import orly from '../styles/assets/img/orly.png'
-import arrows from '../styles/assets/img/arrows-sens.png'
+// import arrows from '../styles/assets/img/arrows-sens.png'
+import { Icon } from 'antd'
 import Buttons from './Buttons'
+import SelectForm from './SelectForm'
+import formules from '../Module/helpers'
+
 
 class TabForm extends Component{
   state = {
    value: '',
-   depart:0,
-   arrive:0,
+   posDepart:0,
+   posArrive:0,
    changePos : true,
    rota: 0,
+   widthButton: 0,
+   sens : ['depart', 'arrive'],
+   data : {},
   }
 
-getValidationState = () => {
- const length = this.state.value.length;
- if (length > 10) return 'success';
- else if (length > 5) return 'warning';
- else if (length > 0) return 'error';
- return null;
+getValidation = () => {
+  this.props.modalOpen()
 }
 
-handleChange = (e) => {
- this.setState({ value: e.target.value });
+componentWillReceiveProps(nextProps){
+  if(nextProps.tabActive !== this.props.tabActive)
+    if(nextProps.tabActive === 0){
+      this.setState({ price : formules() })
+      this.props.sendData({ depart:'Aeroport Orly', arrive: 'Aeroport Orly' })
+    }else {
+      this.setState({ price : formules(1) })
+    }
+}
+
+componentDidMount(){
+  const { button } = this.refs
+  const { sens } = button.refs
+  this.setState({ widthButton: sens.clientHeight, price : formules() })
 }
 
 changeSens = () => {
-  const {formcontainer, button, depart, arrive} = this.refs
-  const { sens } = button.refs
-  let arrivePos, departPos, rotate
+  const { formcontainer, arrive } = this.refs
+  // const { sens } = button.refs
+  const { DataForm, sendData } = this.props
+  let arrivePos, departPos, rotate, swapSens
+  sendData({ depart : DataForm.arrive, arrive :DataForm.depart })
+
   if(this.state.changePos){
-    arrivePos = - ( depart.clientWidth + formcontainer.clientWidth*0.08 + sens.clientWidth);
-    departPos = -arrivePos
-    rotate = 360
+    arrivePos = - ( arrive.clientWidth + formcontainer.clientWidth*0.08 + 30 );
+    departPos = - arrivePos;
+    rotate = 360;
+    swapSens = ['arrive','depart']
+    setTimeout( () => this.setState({textOrly : 'right'}) , 50) // evite les bug render
   }else {
     arrivePos = 0;
     departPos = 0;
-    rotate = 0
+    rotate = 0;
+    swapSens = ['depart','arrive']
+    setTimeout( () => this.setState({textOrly : ''}) , 50)// evite les bug render
   }
-  this.setState({ arrive: arrivePos, depart : departPos, changePos: !this.state.changePos, rota : rotate })
+  this.setState({ posArrive: arrivePos, posDepart : departPos, changePos: !this.state.changePos, rota : rotate, sens : swapSens})
 }
   render(){
-      const {depart, arrive, changePos} = this.state
-      console.log(arrive);
-    if (this.props.tabActive === 1) {
-      return (
-        <div className='container__bottom__inner' ref='formcontainer'>
-        <div className='formSelect' key='depart' ref='depart' style={{ transform: 'translateX('+depart+'px)' }}>
-          <img src={ position }/>
-          <select>
-            <option value='1'>Point de départ</option>
-            <option value='2'>Gare de Lyon</option>
-            <option value='3'>Montparnasse</option>
-          </select>
+    const { posDepart, posArrive, textOrly, sens, price, rota } = this.state
+    let blockArrive, type = 'select'
+    if ( this.props.tabActive === 1 ) {
+      type = 'text'
+        blockArrive = <div className='formSelect' ref='arrive' style={{ transform: 'translateX('+posArrive+'px)' }}>
+          <SelectForm
+            type= { type }
+            name={ sens[1] }
+            ref={ 'Value'+sens[1] }
+            options={["Gare de Lyon", "Denfert Rochereaux", "Montparnasse"]}
+            img={ position }
+            value={ this.handleValue } />
         </div>
-          <Buttons ref='button' text={ <img className='sens' src={arrows}/> } action={ this.changeSens } type='round' rota={this.state.rota} onClick={ this.props.action }/>
-          <div className='formSelect' key='arrive' ref='arrive' style={{ transform: 'translateX('+arrive+'px)' }}>
-            <img src={ position }/>
-            <select>
-              <option value='1'>{"Point d'arrivé"} </option>
-              <option value='2'>Gare de Lyon</option>
-              <option value='3'>Montparnasse</option>
-            </select>
-          </div>
-          <Buttons text="12,50€" action={ this.props.modalOpen } type='round-droit price'/>
-        </div>
-      )
     }
     else {
+      type = 'select'
+      blockArrive = <div
+        className='destination'
+        name={sens[1]}
+        ref='arrive'
+        style={{ transform: 'translateX('+ posArrive +'px)', textAlign : textOrly }}>
+        <img className='orly' src={ orly } alt='plane-icon'/>
+        <span> AÉROPORT </span><span className='font-black'>ORLY</span>
+      </div>
+    }
       return (
         <div className='container__bottom__inner' ref='formcontainer'>
-          <div className='formSelect' ref='depart' style={{ transform: 'translateX('+depart+'px)' }}>
-            <img src={ position }/>
-            <select>
-              <option value='1'>Denfert Rochereaux</option>
-              <option value='2'>Gare de Lyon</option>
-              <option value='3'>Montparnasse</option>
-            </select>
+          <div className='formSelect' ref={'depart'} style={{ transform: 'translateX('+posDepart+'px)' }}>
+            <SelectForm
+              name={ sens[0] }
+              type = { type }
+              key='depart'
+              options={["Denfert Rochereaux", "Gare de Lyon", "Montparnasse"]}
+              img={ position }
+              value={ this.handleValue }
+              ref={ 'Value'+sens[0] } />
           </div>
-          <Buttons ref='button' text={ <img className='sens' src={arrows}/> } action={ this.changeSens } type={'round'} rota={this.state.rota} onClick={ this.props.action }/>
-          <div className='destination' ref='arrive' style={{ transform: 'translateX('+ arrive +'px)' }}>
-            <img className='orly' src={orly}/>
-            <span > AÉROPORT <span className='font-book'>ORLY</span></span>
-          </div>
-          <Buttons text="12,50€" action={ this.props.modalOpen } type='round-droit price'/>
+            <Buttons
+              ref='button'
+              text={ <Icon type="swap" /> }
+              action={ this.changeSens }
+              opt='sens'
+              type='circle'
+              rota={ rota }
+              onClick={ this.props.action } />
+            {blockArrive}
+            <Buttons action={ this.getValidation } text={ price } opt="price" className='round-droit font-black'/>
         </div>
       )
     }
-
-  }
 }
 
-export default TabForm;
+TabForm.proptypes = {
+  sens : PropTypes.Array
+}
+
+export default connect(
+  state => (state),
+  dispatch => ({
+    sendData : ( val ) => dispatch({type : 'SEND_FORM_DATA', data : val })
+  })
+)(TabForm);
