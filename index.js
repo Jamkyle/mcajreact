@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser')
-var nbCars = 2
-
-
+var nbCars = 1
+const keySecret = 'sk_test_NkV0pMUIqCixCWHxOiHmXRli'
+const stripe = require("stripe")(keySecret);
 const app = express();
 
 app.use(bodyParser.json());
@@ -33,6 +33,35 @@ app.get('/api/hello', (req,res)=>{
 app.get('/api/progress', (req, res) => {
   value = ( current / totalPlace ) * 100
   res.json({ ratio : value, nbPlace : placeRest(current, totalPlace), totalPlace : totalPlace })
+});
+
+app.post("/charge", (req, res) => {
+  // console.log(req.body);
+  var amount = (req.body.data.price).replace(',','.') * 100
+  if (req.body.data.active === 0) { // test la formule 12.5€
+    let prixInt = 1250
+    let placesInt = req.body.data.place
+    let rabat = (1.1-(placesInt/10)) // rabat au nb de place
+    placesInt >> 3 ? rabat = 0.7 : 1
+    amount = parseInt(prixInt * placesInt * rabat)
+    // console.log(prixInt +' '+placesInt+' '+rabat);
+  }
+  stripe.customers.create({
+    email: req.body.email,
+    card: req.body.id
+  })
+  .then(customer =>
+    stripe.charges.create({
+      amount,
+      description: "Sample Charge",
+      currency: "eur",
+      customer: customer.id
+    }))
+  .then( charge => res.send(charge) )
+  .catch(err => {
+    console.log("Error:", err);
+    res.status(500).send({error: "Purchase Failed"});
+  });
 });
 
 function fillSelect(){

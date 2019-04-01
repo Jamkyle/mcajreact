@@ -158,8 +158,8 @@ body {
 }
 
 .button{
-  // border : none!important;
-  // box-shadow: 0.5px 0.5px 0px #b14a4e;
+  border : none!important;
+  box-shadow: 0.5px 0.5px 0px #b14a4e;
 }
 
 .button{
@@ -178,6 +178,7 @@ body {
 
 .round-droit{
   border-radius: 50px!important;
+  min-width: 70px
 }
 
 .round{

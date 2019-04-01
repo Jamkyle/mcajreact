@@ -73,21 +73,21 @@
 }
 
 .left-add{
-  display: inline-block;
+  display: inline-flex;
+  @include font("Circular Air-Book", 1em, null, $grey);
+  width: 15%;
   text-align: center;
-  @include font("Circular Air-Book", 0.7em, null, $grey);
   & > span{
     margin: auto;
   }
 }
 
 .TextInput{
-  padding: 0;
-  width: 47%;
   position: relative;
+  padding: 0;
   overflow: hidden;
   text-align: right;
-  display: inline-block;
+  display: inline-flex;
   border: solid 1px #d2d5d0;
   background: #edefed;
   & > input {
@@ -98,23 +98,24 @@
     outline: none;
     width: 100%;
     &.add{
-      display: inline-block;
-      width: 82%;
+      font-size: 2vmin;
+      max-width: 85%;
     }
   }
 }
+
 input{
   &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #efefef;
+  color: #82898d;
   opacity: 1; /* Firefox */
   }
 
   &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: #efefef;
+      color: #82898d;
   }
 
   &::-ms-input-placeholder { /* Microsoft Edge */
-      color: #efefef;
+      color: #82898d;
   }
 }
 
@@ -126,4 +127,79 @@ input{
   display: block;
   margin: auto;
   width : 10vw
+}
+
+.datetime{
+  max-width: 56px;
+  position: relative;
+  padding: 0;
+  text-align: right;
+  display: inline-flex;
+  border: solid 1px #d2d5d0;
+  background: #edefed;
+  & > input {
+    text-align: left;
+    margin: 0;
+    border: none;
+    padding: 0.5em;
+    outline: none;
+    width: 100%;
+  }
+}
+
+.datepicker{
+  & > * {
+    border-radius: 0!important
+  }
+  font-family: "Circular Air-Book"!important;
+  font-size: 0.9em!important;
+  border-radius: 0!important
+}
+
+.ct-s{
+  &-5{
+    width: 47%
+  }
+  &-1{
+    width: 10%
+  }
+  &-2{
+    width: 20%
+  }
+  &-3{
+    width: 26%
+  }
+  &-4{
+    width: 38%
+  }
+  &-7{
+    width: 70%
+  }
+  &-8{
+    width: 78%
+  }
+  &-9{
+    width: 88%
+  }
+}
+
+.cl {
+  &-l{
+    &-1{
+      margin: 0 2% 3% 0px
+    }
+  }
+  &-r{
+    &-1{
+      margin: 0 0% 3% 2%
+    }
+  }
+}
+.ct-h{
+  display: inline-flex;
+}
+
+.contain-form{
+  margin: auto;
+  text-align : left;
 }

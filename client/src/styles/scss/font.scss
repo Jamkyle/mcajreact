@@ -1,5 +1,33 @@
 @import 'mixin';
 
-@include font-face("Circular Air-Bold", '../assets/fonts/Circular Air Web/Archive/Circular Air-Bold', null, null, eot ttf woff svg);
-@include font-face("Circular Air-Book", '../assets/fonts/Circular Air Web/Archive/Circular Air-Book', null, null, eot ttf woff svg)
+@include font-face("Circular Air-Bold", '../assets/fonts/Circular Air Web/Archive/Circular Air-Bold', 400, null, eot ttf woff svg);
+@include font-face("Circular Air-Book", '../assets/fonts/Circular Air Web/Archive/Circular Air-Book', 400, null, eot ttf woff svg)
 @include font-face("Circular Air-Black", '../assets/fonts/Circular Air Web/Archive/Circular Air-Black', 400, null, eot ttf woff svg)
+
+
+.fs{
+  &-norm {
+    &-g{
+        font-size: 1em
+    }
+    font-size : 2vmin
+  }
+  &-xl {
+    font-size : 1.4em
+  }
+
+}
+.fc-white{
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #efefef!important;
+  opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: #efefef!important;
+  }
+
+  &::-ms-input-placeholder { /* Microsoft Edge */
+      color: #efefef!important;
+  }
+}

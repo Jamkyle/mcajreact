@@ -12,7 +12,7 @@ class Buttons extends Component{
       sup = null
 
     return(
-      <Button type='primary' shape={ this.props.type } onClick={ this.props.action } style={{ transform: 'rotate('+this.props.rota+'deg)' }} className={ this.props.className +' button red'} ref='sens' >
+      <Button type='primary' shape={ this.props.type } onClick={ this.props.action } style={{ transform: 'rotate('+this.props.rota+'deg)' }} className={ this.props.className +' button red'} ref='sens' disabled={ this.props.disable }>
         {this.props.text}{sup}
       </Button>
     )

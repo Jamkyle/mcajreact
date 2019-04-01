@@ -1,0 +1,36 @@
+@font-face {
+  font-family: "Circular Air-Bold";
+  font-weight: 400;
+  src: url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.eot?") format("eot"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.ttf") format("truetype"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.woff") format("woff"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Bold.svg#Circular_Air-Bold") format("svg"); }
+
+@font-face {
+  font-family: "Circular Air-Book";
+  font-weight: 400;
+  src: url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.eot?") format("eot"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.ttf") format("truetype"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.woff") format("woff"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Book.svg#Circular_Air-Book") format("svg"); }
+
+@font-face {
+  font-family: "Circular Air-Black";
+  font-weight: 400;
+  src: url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.eot?") format("eot"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.ttf") format("truetype"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.woff") format("woff"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.svg#Circular_Air-Black") format("svg"); }
+
+.fs-norm {
+  font-size: 2vmin; }
+  .fs-norm-g {
+    font-size: 1em; }
+
+.fs-xl {
+  font-size: 1.4em; }
+
+.fc-white::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #efefef !important;
+  opacity: 1;
+  /* Firefox */ }
+
+.fc-white:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #efefef !important; }
+
+.fc-white::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #efefef !important; }

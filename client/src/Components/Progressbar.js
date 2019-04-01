@@ -18,13 +18,13 @@ spanPlace = null
 
   render() {
     if( this.state.nbPlace << this.state.totalPlace )
-      this.spanPlace =  <span style={{color: '#949a9d'}}>Plus que { this.state.nbPlace } places !</span>
+      this.spanPlace =  <span style={{color: '#949a9d'}}>Plus que { this.state.nbPlace } { this.state.nbPlace > 1 ? 'places' : 'place' } !</span>
     else this.spanPlace = <span style={{color: 'red'}} >Plus disponible !</span>
 
     return (
       <div className='progress--container font-book' >
         <div className='progress' style={bar}>
-          <div className='progress-bar' style={ { width : this.state.ratio+'%'} }></div>
+          <div className='progress-bar' style={ { width : this.state.ratio+'%' } }></div>
         </div>
         { this.spanPlace }
       </div>

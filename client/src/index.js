@@ -4,11 +4,14 @@ import ReactDOM from 'react-dom';
 import './styles/css/index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import {StripeProvider} from 'react-stripe-elements';
 import store from './Module/store'
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <StripeProvider apiKey="pk_test_DD5S71d8Y0UIIsExbpR0Kfvf">
+      <App />
+    </StripeProvider>
   </Provider> ,
   document.getElementById('root'));
 registerServiceWorker();

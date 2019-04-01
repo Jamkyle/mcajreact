@@ -36,7 +36,7 @@ const backdropStyle = {
   bottom: 0,
   left: 0,
   right: 0,
-  
+
   padding: 50
 };
 
@@ -46,9 +46,9 @@ const modalStyle = {
   backgroundColor: '#f7f7f7',
   zIndex: 3,
   borderRadius: 2,
-  maxWidth: '51.6%',
-  minHeight: '64.2%',
-  margin: '0 auto',
+  maxWidth: '57.6vw',
+  minHeight: '64.2vh',
+  margin: '10% auto',
   padding: '30px 50px',
 };
 

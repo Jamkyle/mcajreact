@@ -5,14 +5,12 @@ import { connect } from 'react-redux'
 class Authpage extends Component{
 
   componentDidMount(){
-
-
     firebase.ui.start('#googleSignIn', auth.uiConfig);
   }
 
   render(){
     return(
-     <div id='googleSignIn'>
+    <div id='googleSignIn'>
       <div className='Modal--Title font-bold'> Je me connecte... </div>
       <div id='loader'></div>
     </div>

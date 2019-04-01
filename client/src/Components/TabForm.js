@@ -21,24 +21,48 @@ class TabForm extends Component{
    sens : ['depart', 'arrive'],
    data : {},
   }
+  direction = null
 
-getValidation = () => {
-  this.props.modalOpen()
-}
+  getValidation = () => {
+    this.props.sendData({ price : this.state.price })
+    this.props.modalOpen()
+  }
 
 componentWillReceiveProps(nextProps){
+
   if(nextProps.tabActive !== this.props.tabActive)
     if(nextProps.tabActive === 0){
       this.setState({ price : formules() })
       this.props.sendData({ depart:'Aeroport Orly', arrive: 'Aeroport Orly' })
-    }else {
-      this.setState({ price : formules(1) })
     }
+
+  if (nextProps.tabActive === 1) {
+    this.setState({ price : '...' })
+    if(nextProps.DataForm.depart !== "" && nextProps.DataForm.arrive !== "" && typeof nextProps.DataForm.arrive === 'string' && typeof nextProps.DataForm.depart === 'string' ){
+      this.direction.route({
+        origin: nextProps.DataForm.depart,
+        destination: nextProps.DataForm.arrive,
+        provideRouteAlternatives: false,
+        travelMode: 'DRIVING',
+      }, data => {
+        if (data.status === 'OK'){
+          let distance = data.routes[0].legs[0].distance.value / 1000
+          let duration = data.routes[0].legs[0].duration.value / 60
+          let prix = Math.round( distance*1.52 + duration * 0.34 ).toFixed(2)
+          this.setState({ price : prix});
+          // console.log(duration+ 'min '+ distance +'km ')
+        }
+      })
+    }
+  }
+
+
 }
 
 componentDidMount(){
   const { button } = this.refs
   const { sens } = button.refs
+  this.direction = new window.google.maps.DirectionsService()
   this.setState({ widthButton: sens.clientHeight, price : formules() })
 }
 
@@ -74,8 +98,9 @@ changeSens = () => {
             type= { type }
             name={ sens[1] }
             ref={ 'Value'+sens[1] }
-            options={["Gare de Lyon", "Denfert Rochereaux", "Montparnasse"]}
+            options={[""]}
             img={ position }
+            styleclass = {'fc-white'}
             value={ this.handleValue } />
         </div>
     }
@@ -97,9 +122,10 @@ changeSens = () => {
               name={ sens[0] }
               type = { type }
               key='depart'
-              options={["Denfert Rochereaux", "Gare de Lyon", "Montparnasse"]}
+              options={["Denfert Rochereau", "Gare de Lyon", "Montparnasse"]}
               img={ position }
               value={ this.handleValue }
+              styleclass = { 'fc-white' }
               ref={ 'Value'+sens[0] } />
           </div>
             <Buttons

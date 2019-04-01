@@ -7,7 +7,9 @@
     "antd": "^3.2.1",
     "express": "^4.16.2",
     "firebase": "^4.10.1",
-    "heroku": "^0.2.0"
+    "heroku": "^0.2.0",
+    "react-stripe-elements": "^2.0.1",
+    "stripe": "^6.10.0"
   },
   "scripts": {
     "start": "node index.js",

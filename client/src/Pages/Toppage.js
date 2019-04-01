@@ -8,7 +8,7 @@ import SocialNetwork from '../styles/assets/svg'
 import {Icon} from 'antd'
 
 class Toppage extends Component{
-  state = {isOpen:false, tabActive : 0, language : "fr", modal: 'resaForm'}
+  state = { isOpen:false, tabActive : 0, language : "fr", modal: 'resaForm' }
   toggleModal = (e) =>{
     let modal
 
@@ -47,7 +47,7 @@ class Toppage extends Component{
             <img src={SocialNetwork.facebook} alt='facebook'/>
             <img src={SocialNetwork.twitter} alt='twitter'/>
             <span onClick={ () => this.switchLang('fr') } className={ language !== 'fr' ? 'language':'' } >FR </span><span className={ language !== 'en' ? 'language':'' }onClick={ () => this.switchLang('en') } >| EN</span>
-            <span name='auth' onClick={ this.toggleModal } >  { message } <Icon type="login" /></span>
+            {/*<span name='auth' onClick={ this.toggleModal } >  { message } <Icon type="login" /></span>*/}
           </div>
           <span className='logo'>vroom<span style={{ color :'#ff4747' }}>cab</span></span>
         </header>
@@ -62,7 +62,7 @@ class Toppage extends Component{
       <Modal show={ this.state.isOpen }
         option={ this.state.modal }
         onClose={ this.toggleModal }>
-        <ModalContent toggleModal={ this.toggleModal } />
+        <ModalContent toggleModal={ this.toggleModal } tabActive={tabActive} />
       </Modal>
     </div>
     )

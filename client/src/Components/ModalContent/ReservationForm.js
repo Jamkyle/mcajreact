@@ -4,21 +4,38 @@ import Progressbar from '../Progressbar'
 import TextInput from './TextInput'
 import Buttons from '../Buttons'
 import SelectForm from '../SelectForm'
+import {Select} from 'antd'
 import DatePick from './DatePick'
+import Profil from './ReservationForm/Profil'
+import Paiement from './ReservationForm/Paiement'
+import Response from './ReservationForm/Response'
+
+// import {injectStripe} from 'react-stripe-elements';
 
 
 class ReservationForm extends Component{
-  state = { selPlaces : [1] }
+  state = { selPlaces : [1], step : 0}
 
   componentDidMount(){
+    console.log(this.props);
     fetch( '/api/ASK_PLACES')
     .then(res => res.json())
     .then(res => {
       this.setState( res );
     });
   }
-  onSubmit = ( ) =>{
+
+  toStep = (ev) => {
+    console.log('next');
+    this.setState({ step : this.state.step + ev })
+
+  }
+
+
+
+  onSubmit = () =>{
     this.props.sendData(this.state.data)
+
     const params = {
       method: 'POST',
       headers: {
@@ -26,6 +43,7 @@ class ReservationForm extends Component{
       },
       body : JSON.stringify(this.props.DataForm)
     }
+
     fetch( '/api/SEND_DATA', params )
     .then(res => res.json() )
     .then(res => {
@@ -39,33 +57,28 @@ class ReservationForm extends Component{
     let obj = {}
     let value = e.target.value
     if ( e.target.getAttribute('name') === 'phoneNum' ) {
+
       value = '0' + value
     }
     obj[e.target.getAttribute('name')] = value
     this.setState({ data : {...this.state.data , ...obj} })
+
   }
 
   render(){
     const { selPlaces } =  this.state
     const { DataForm, lang } = this.props
-
+    let form = [<Profil selPlaces={selPlaces} getData={this.getData} onSubmit={ ()=> this.toStep(1) } tabActive={this.props.tabActive}/>, <Paiement {...this.props} {...this.state} action={ () => this.toStep(1) }/>, <Response {...this.props} {...this.state}  />]
     return(
       <div>
-        <div className='Modal--Title font-bold'> Je réserve... </div>
-        <p className='font-bold font-color--darkblue'>
-          <span>{ DataForm.depart }</span> <span style={{ color : "#82898d", fontFamily: 'Circular Air-Book' }}>{ lang.form.select.arrive }</span> <span >{ DataForm.arrive }</span>
+        <span style={{float : 'left', cursor: 'pointer'}} onClick={ ()=> this.toStep(-1) } >{this.state.step === 1 && ' < retour '}</span>
+        <div className='Modal--Title font-bold '> Je réserve... </div>
+        <p className='font-bold font-color--darkblue fs-xl'>
+          <span>{ DataForm.depart+" " }</span><span style={{ color : "#82898d", fontFamily: 'Circular Air-Book' }}>{ lang.form.select.arrive }</span><span>{ DataForm.arrive }</span>
         </p>
-        <Progressbar />
-        <form >
-          <DatePick />
-          <SelectForm options={ selPlaces } name='place' type='select'/>
-          <TextInput name='LastName' placeholder='Nom' onBlur={ this.getData }/>
-          <TextInput name='FirstName' placeholder='Prénom'onBlur={ this.getData }/>
-          <TextInput name='CompagnyName' placeholder='Nom de la Société (optionnel)' onBlur={ this.getData }/>
-          <TextInput name='email' placeholder='Adresse de messagerie' onBlur={ this.getData }/>
-          <TextInput typeInput='text-tel' name='phoneNum' placeholder='X XX XX XX XX' onBlur={ this.getData }/>
-          <Buttons action={ this.onSubmit } text={ 'Valider' } className='round-droit alone'/>
-        </form>
+        {
+          form[this.state.step]
+        }
       </div>
 
     )
