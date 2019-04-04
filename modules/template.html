@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bon de commande</title>
+    <link href='https://fonts.googleapis.com/css?family=Molle:400italic|Great+Vibes|Raleway' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style media="screen">
+      .blue{
+        color: #42E
+      }
+      .red{
+        color : #E34
+      }
+      .green{
+        color : #2AA3EE
+      }
+      .cyan{
+        color : #00BFFF
+      }
+      .grey{
+        color : #888
+      }
+      .molle{
+        font-family: 'Molle', cursive;
+        font-size: 40px
+      }
+      .greatvibes{
+        font-family: 'Great Vibes', cursive;
+        font-size: 40px
+      }
+      .sign{
+        padding: 10px;
+        font-size: 12px
+      }
+      .raleway{
+        font-family: 'Raleway', sans-serif;
+      }
+      .table{
+        margin-bottom : 10px
+      }
+    </style>
+  </head>
+  <body>
+    <div class="panel panel-default">
+      <div class="panel-heading raleway"><h2>Bonjour {{FirstName}} {{LastName}},</h2></div>
+
+      <div class="panel-body">
+        Vous avez commandé votre <b>Vroomcab</b>
+        <table class='table table-bordered'>
+          <tbody>
+            <tr>
+              <td>
+                Votre identifiant
+              </td>
+              <td>
+                <span >{{ FirstName|title| replace("^(.{4,4})(.*)", "$1") }}{{ LastName|lower| replace("^(.{4,4})(.*)", "$1") }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Places
+              </td>
+              <td>
+                <span >{{ place }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Départ
+              </td>
+              <td>
+                <span class='blue' ><b>{{depart}}</b></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Destination
+              </td>
+              <td>
+                <span class='blue' ><b>{{arrive}}</b></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Jour du départ
+              </td>
+              <td>
+                <span class='red' ><b>{{ date }}</b></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Heure du départ
+              </td>
+              <td>
+                <span style='color:#E34'><b>{{hours}}</b></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Voiture
+              </td>
+              <td>
+                  <span class='green' ><b>Peugeot 508</b></span><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                  Matricule
+              </td>
+              <td>
+                <span class='green'><b>DY-971-KY</b></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Ci-joint votre facture, <br>
+        </p>
+        <p class='green'>
+          Merci de votre confiance.<br>
+        </p>
+        <br>
+        <br>
+        <p>
+          Si vous désirez annuler votre commande cliquez sur le lien ci dessous : <br> <a href={{ "https://yreham.com/cancel/?course="+eid+"&date="+creneau }} >{{ "http://vroomcab.fr/cancel/?course="+eid+"&date="+creneau }}</a>
+        </p>
+      </div>
+      <div class="panel-footer">
+        <span class='logo'>Vroomcab</span>
+        <div class="sign">
+          <span style='font-size : 16px' >&#9990;</span> <span class='grey'> : +33 6 29 20 22 51</span><br>
+          <span style='font-size : 18px' >&#9993;</span> <span class='grey'> : M'CAR'J - 69, rue de la glacière 75013 PARIS</span>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </body>
+</html>

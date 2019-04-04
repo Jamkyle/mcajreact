@@ -3,7 +3,7 @@ import Progressbar from '../../Progressbar'
 import TextInput from '../TextInput'
 import Buttons from '../../Buttons'
 import SelectForm from '../../SelectForm'
-import {Select} from 'antd'
+import { Select } from 'antd'
 import DatePick from '../DatePick'
 
 const Profil = (props) => {

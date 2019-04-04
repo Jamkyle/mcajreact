@@ -1,10 +1,4 @@
 import React from 'react'
-import Progressbar from '../../Progressbar'
-import TextInput from '../TextInput'
-import Buttons from '../../Buttons'
-import SelectForm from '../../SelectForm'
-import {Select} from 'antd'
-import DatePick from '../DatePick'
 import {Elements} from 'react-stripe-elements';
 
 import InjectedCheckoutForm from '../Stripe/CheckoutForm';

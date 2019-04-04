@@ -23,7 +23,7 @@ class CheckoutForm extends React.Component {
       fetch("/charge", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({...token , data : {...this.props.DataForm, active : this.props.tabActive } })
+        body: JSON.stringify({...token , data : {...this.props.DataForm, ...this.props.data, active : this.props.tabActive } })
       })
       .then(response => {
         if (!response.ok)

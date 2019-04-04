@@ -5,13 +5,14 @@ var nbCars = 1
 const keySecret = 'sk_test_NkV0pMUIqCixCWHxOiHmXRli'
 const stripe = require("stripe")(keySecret);
 const app = express();
+const writeDatabase = require('./modules/writeDatabase')
+const db = require('./modules/firebase').database()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 let totalPlace = 4 * nbCars
 let current = 0
 let places = [1,2,3,4]
-
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -20,6 +21,7 @@ app.get('/api/ASK_PLACES', (req, res)=>{
   places = fillSelect()
   res.json({ selPlaces : places })
 });
+
 app.post('/api/SEND_DATA', (req, res) => {
   current = current + parseInt(req.body.place)
   current > totalPlace ? current = 0 : current = current
@@ -27,9 +29,11 @@ app.post('/api/SEND_DATA', (req, res) => {
 
     res.json({ ratio : value, nbPlace : placeRest(current, totalPlace), selPlaces : fillSelect() })
 });
+
 app.get('/api/hello', (req,res)=>{
   res.json({ message:'hello world!' })
 });
+
 app.get('/api/progress', (req, res) => {
   value = ( current / totalPlace ) * 100
   res.json({ ratio : value, nbPlace : placeRest(current, totalPlace), totalPlace : totalPlace })
@@ -57,7 +61,7 @@ app.post("/charge", (req, res) => {
       currency: "eur",
       customer: customer.id
     }))
-  .then( charge => res.send(charge) )
+  .then( charge => { res.send(charge); writeDatabase(db, req.body.data, amount) } )
   .catch(err => {
     console.log("Error:", err);
     res.status(500).send({error: "Purchase Failed"});
