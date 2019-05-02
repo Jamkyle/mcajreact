@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import {connect} from 'react-redux'
+
 class TextInput extends Component {
+  state = { phone : '' }
+
+  handlePhone = (e) => {
+    let obj = {}
+    obj['phoneNum'] = e
+    this.props.sendData(obj)
+  }
 
   render(){
-
     switch (this.props.typeInput) {
       case 'text-tel' :
         return (
-          <div className={'TextInput font-book fs-norm ct-s-5 '+this.props.className} >
-            <div className='left-add'><span>+33</span></div>
-            <input
-            className='add'
-            name={ this.props.name }
-            type="tel"
-            placeholder={ this.props.placeholder }
-            pattern=".?[0-9] ([0-9]{2} ?){4}"
-            onBlur={ this.props.onBlur } />
-          </div>
+            <PhoneInput inputClassName={'ct-s-5 font-book fs-norm '+this.props.className} className={' ct-s-5 '+this.props.className} value={this.state.phone} onChange={ phone => this.setState({phone}) } onBlur={ () => this.handlePhone(this.state.phone) }/>
         )
       default:
         return ( <div className={'TextInput font-book fs-norm ct-s-5 '+this.props.className}>
           <input
+          required={ this.props.required }
           name={ this.props.name }
           onBlur={ this.props.onBlur }
           type="text"
@@ -30,6 +32,7 @@ class TextInput extends Component {
     }
   }
 }
+
 TextInput.propTypes = {
   name: PropTypes.string,
   placeholder: PropTypes.string,
@@ -38,4 +41,9 @@ TextInput.propTypes = {
 };
 
 
-export default TextInput
+export default connect(
+    state => state,
+    dispatch => ({
+      sendData : ( val ) => dispatch({type : 'SEND_FORM_DATA', data : val })
+    })
+  )(TextInput)

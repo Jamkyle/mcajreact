@@ -319,6 +319,9 @@ body {
       font-size: 2vmin;
       max-width: 85%; }
 
+.border-tel {
+  border: solid 1px #d2d5d0; }
+
 input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #82898d;

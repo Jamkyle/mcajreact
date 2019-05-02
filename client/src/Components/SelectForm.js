@@ -22,7 +22,7 @@ class SelectForm extends Component{
   }
 
   componentDidMount(){
-    if(this.props.type !== 'select'){
+    if( this.props.type !== 'select' ){
       this.autocomplete = new window.google.maps.places.Autocomplete(this.refs['select-'+this.props.name], mapOption )
       this.autocomplete.addListener('place_changed', () => this.getData(this.refs['select-'+this.props.name].value) );
     }

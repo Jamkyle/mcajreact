@@ -28,6 +28,8 @@ class ReservationForm extends Component{
 
 
   onSubmit = () =>{
+    console.log(this.state.data)
+
     this.props.sendData(this.state.data)
 
     const params = {
@@ -50,10 +52,9 @@ class ReservationForm extends Component{
   getData = (e) => {
     let obj = {}
     let value = e.target.value
-    if ( e.target.getAttribute('name') === 'phoneNum' ) {
-
-      value = '0' + value
-    }
+    // if ( e.target.getAttribute('name') === 'phoneNum' ) {
+    //   value = '+33' + value
+    // }
     obj[e.target.getAttribute('name')] = value
     this.setState({ data : {...this.state.data , ...obj} })
 

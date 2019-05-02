@@ -62,7 +62,7 @@ class Toppage extends Component{
       <Modal show={ this.state.isOpen }
         option={ this.state.modal }
         onClose={ this.toggleModal }>
-        <ModalContent toggleModal={ this.toggleModal } tabActive={tabActive} />
+        <ModalContent toggleModal={ this.toggleModal } tabActive={ tabActive } />
       </Modal>
     </div>
     )
