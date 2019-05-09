@@ -306,7 +306,6 @@ body {
   overflow: hidden;
   text-align: right;
   display: inline-flex;
-  border: solid 1px #d2d5d0;
   background: #edefed; }
   .TextInput > input {
     text-align: left;
@@ -403,6 +402,15 @@ input::-ms-input-placeholder {
 .contain-form {
   margin: auto;
   text-align: left; }
+
+.check {
+  border: solid 1px #d2d5d0 !important; }
+
+.valide {
+  border: solid 1px #99cbf1 !important; }
+
+.error {
+  border: solid 1px #FF4747 !important; }
 
 .Modal--Title {
   font-size: 2vw;

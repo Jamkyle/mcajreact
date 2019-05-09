@@ -28,7 +28,6 @@ class ReservationForm extends Component{
 
 
   onSubmit = () =>{
-    console.log(this.state.data)
 
     this.props.sendData(this.state.data)
 
@@ -63,7 +62,7 @@ class ReservationForm extends Component{
   render(){
     const { selPlaces } =  this.state
     const { DataForm, lang } = this.props
-    let form = [<Profil selPlaces={selPlaces} getData={this.getData} onSubmit={ ()=> this.toStep(1) } tabActive={this.props.tabActive}/>, <Paiement {...this.props} {...this.state} action={ () => this.toStep(1) }/>, <Response {...this.props} {...this.state}  />]
+    let form = [<Profil selPlaces={selPlaces} data={{...DataForm, ...this.state.data}} getData={this.getData} onSubmit={ ()=> this.toStep(1) } tabActive={this.props.tabActive}/>, <Paiement {...this.props} {...this.state} action={ () => this.toStep(1) }/>, <Response {...this.props} {...this.state}  />]
     return(
       <div>
         <span style={{float : 'left', cursor: 'pointer'}} onClick={ ()=> this.toStep(-1) } >{this.state.step === 1 && ' < retour '}</span>

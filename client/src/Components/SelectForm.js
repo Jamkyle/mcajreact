@@ -64,7 +64,7 @@ class SelectForm extends Component{
     let input
     if(this.props.type === 'select'){
       if (this.props.name === 'place') {
-        input =  <Select style={{ minWidth:50 }} defaultValue={'place'} name={ this.props.name } className="itemForm addCarret datepicker place" ref={ 'select-'+this.props.name } onChange={ this.getData }>
+        input =  <Select style={{ minWidth:50 }} defaultValue={this.props.value||'place'} name={ this.props.name } className="itemForm addCarret datepicker place" ref={ 'select-'+this.props.name } onChange={ this.getData } >
                   { options }
                 </Select>
       }else {

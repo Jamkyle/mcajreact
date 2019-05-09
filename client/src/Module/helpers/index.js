@@ -7,3 +7,10 @@ const formules = (indice) => {
   }
 }
 export default formules
+
+
+export const validator = ( data, func ) => {
+
+  if( data.FirstName && data.LastName && data.email && data.phoneNum  )
+    func()
+}
