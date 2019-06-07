@@ -42,26 +42,28 @@ app.get('/api/progress', (req, res) => {
 app.post("/charge", (req, res) => {
   // console.log(req.body);
   var amount = (req.body.data.price).replace(',','.') * 100
+  var customer = ''
   if (req.body.data.active === 0) { // test la formule 12.5€
     let prixInt = 1250
     let placesInt = req.body.data.place
-    let rabat = (1.1-(placesInt/10)) // rabat au nb de place
-    placesInt >> 3 ? rabat = 0.7 : 1
+    let rabat = ( 1.1-(placesInt/10) ) // rabat au nb de place
+    placesInt >> 3 ? rabat = 0.7 : 1 // si le nb place supérieur à 3
     amount = parseInt(prixInt * placesInt * rabat)
     // console.log(prixInt +' '+placesInt+' '+rabat);
   }
+
   stripe.customers.create({
     email: req.body.email,
     card: req.body.id
   })
   .then(customer =>
     stripe.charges.create({
-      amount,
-      description: "Sample Charge",
-      currency: "eur",
-      customer: customer.id
-    }))
-  .then( charge => { res.send(charge); writeDatabase(db, req.body.data, amount) } )
+    amount,
+    description: 'vroomcab : de '+req.body.data.depart+' vers '+req.body.data.arrive,
+    currency: "eur",
+    customer: customer.id
+  }))
+  .then( charge => { res.send(charge); writeDatabase( req.body.data, amount, charge.customer ) } )
   .catch(err => {
     console.log("Error:", err);
     res.status(500).send({error: "Purchase Failed"});

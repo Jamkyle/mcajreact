@@ -34,7 +34,7 @@ class CheckoutForm extends React.Component {
         console.log("Purchase succeeded:", output);
         this.props.sendData({response: 'Votre paiement a été validé'})
         this.props.action()
-        this.setState({ disable: false  })
+        // this.setState({ disable: false  })
       })
       .catch(err => {
         this.props.sendData({response: 'Err'})

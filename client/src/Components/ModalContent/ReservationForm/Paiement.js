@@ -1,9 +1,9 @@
 import React from 'react'
-import {Elements} from 'react-stripe-elements';
+import { Elements } from 'react-stripe-elements';
 
 import InjectedCheckoutForm from '../Stripe/CheckoutForm';
 
-const Paiement = (props) => {
+const Paiement = ( props ) => {
   console.log(props);
   //A faire coté server
   let date = props.DataForm.dateFormatLString.split(' ')

@@ -5,7 +5,8 @@ import ReservationForm from '../Components/ModalContent/ReservationForm'
 import Authpage from '../Components/ModalContent/Authpage'
 import TabForm from '../Components/TabForm'
 import SocialNetwork from '../styles/assets/svg'
-import {Icon} from 'antd'
+import { Icon } from 'antd'
+
 
 class Toppage extends Component{
   state = { isOpen:false, tabActive : 0, language : "fr", modal: 'resaForm' }
@@ -23,7 +24,13 @@ class Toppage extends Component{
       isOpen: !this.state.isOpen,
       modal : modal
     })
+
+    console.log(modal);
   }
+  onSelect = (e) => {
+    console.log(e);
+  }
+
   switchLang = (e) => {
     this.props.switchLang(e)
     this.setState({language : e})
@@ -40,12 +47,11 @@ class Toppage extends Component{
     const ModalContent = ModalComponent[this.state.modal]
     return (
       <div className='TopPage page'>
-      <div className='screen-dark page'></div>
       <div className='container'>
-        <header className='container__header'>
+        <header ref='header' className={`container__header ${ this.props.scroll > 5 && 'sticky' }` }>
           <div className='right'>
-            <img src={SocialNetwork.facebook} alt='facebook'/>
-            <img src={SocialNetwork.twitter} alt='twitter'/>
+            <img src={ SocialNetwork.facebook } alt='facebook'/>
+            <img src={ SocialNetwork.twitter } alt='twitter'/>
             <span onClick={ () => this.switchLang('fr') } className={ language !== 'fr' ? 'language':'' } >FR </span><span className={ language !== 'en' ? 'language':'' }onClick={ () => this.switchLang('en') } >| EN</span>
             {/*<span name='auth' onClick={ this.toggleModal } >  { message } <Icon type="login" /></span>*/}
           </div>

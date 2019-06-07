@@ -25,7 +25,7 @@ class DatePick extends Component{
       time = moment().add(1, 'hour')
     }
 
-    console.log(this.props.value.date);
+    // console.log(this.props.value.date);
     this.props.value.hour !== undefined && this.props.value.date !== undefined ?
     this.setState({ date: moment(this.props.value.date), hours: time.set({'hour': this.props.value.hour.split(':')[0], 'minute': this.props.value.hour.split(':')[1]}) })
     : this.setState({ date: time, hours : time.add(30 - moment().minute() % 30 , "minutes") })
@@ -71,7 +71,7 @@ class DatePick extends Component{
     return (
       <div className='ct-h ct-s-7'>
         <DatePicker
-          className='cl-l-1'
+          className='cl-l-1 Date'
           customInput={<CustomInput />}
           ref='date'
           dateFormat = { this.props.lang.form.formatDate }
@@ -82,7 +82,7 @@ class DatePick extends Component{
         />
         <DateTime local='fr-fr'
           ref='hours'
-          className='ct-s-3 cl-r-1  '
+          className='ct-s-3 Date'
           dateFormat={false}
           timeFormat= "HH:mm"
           timeConstraints	= { { hours: { min: 6, max: 22, step: 2 } ,minutes : { step : 15 } } }

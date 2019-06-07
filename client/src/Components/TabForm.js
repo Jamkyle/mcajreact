@@ -13,8 +13,8 @@ import formules from '../Module/helpers'
 class TabForm extends Component{
   state = {
    value: '',
-   posDepart:0,
-   posArrive:0,
+   posDepart:{ x:0, y: 0 },
+   posArrive:{ x:0, y:0 },
    changePos : true,
    rota: 0,
    widthButton: 0,
@@ -59,6 +59,22 @@ componentWillReceiveProps(nextProps){
 
 }
 
+// updateDimensions(){
+//   if(window.innerWidth < 500) {
+//       this.setState({ width: 450, height: 102 });
+//     } else {
+//       let update_width  = window.innerWidth-100;
+//       let update_height = Math.round(update_width/4.4);
+//       this.setState({ width: update_width, height: update_height });
+//     }
+// }
+//
+// componentDidMount() {
+//     this.updateDimensions();
+//     window.addEventListener("resize", this.updateDimensions.bind(this));
+//   }
+
+
 componentDidMount(){
   const { button } = this.refs
   const { sens } = button.refs
@@ -66,58 +82,79 @@ componentDidMount(){
   this.setState({ widthButton: sens.clientHeight, price : formules() })
 }
 
-changeSens = () => {
-  const { formcontainer, arrive } = this.refs
+
+changeSens = (e) => {
+  const { formcontainer, arrive, depart } = this.refs
   // const { sens } = button.refs
   const { DataForm, sendData } = this.props
-  let arrivePos, departPos, rotate, swapSens
+  let arrivePosX, departPosX, arrivePosY, departPosY, rotate, swapSens
+  const el = e.target
   sendData({ depart : DataForm.arrive, arrive :DataForm.depart })
+  var button = {
+    posX : el.offsetLeft - el.scrollLeft + el.clientLeft,
+    posY: el.offsetTop - el.scrollTop + el.clientTop,
+    size : el.clientWidth
+  }
 
   if(this.state.changePos){
-    arrivePos = - ( arrive.clientWidth + formcontainer.clientWidth*0.08 + 30 );
-    departPos = - arrivePos;
+    arrivePosX =  - ( arrive.offsetLeft + arrive.scrollLeft + arrive.clientLeft  );
+    departPosX =  - arrivePosX;
+    arrivePosY = - ( 0 );
+    departPosY = - arrivePosY;
     rotate = 360;
     swapSens = ['arrive','depart']
     setTimeout( () => this.setState({textOrly : 'right'}) , 50) // evite les bug render
   }else {
-    arrivePos = 0;
-    departPos = 0;
+    arrivePosX = 0;
+    departPosX = 0;
+    arrivePosY = 0;
+    departPosY = 0;
     rotate = 0;
-    swapSens = ['depart','arrive']
+    swapSens = ['depart','arrive'];
     setTimeout( () => this.setState({textOrly : ''}) , 50)// evite les bug render
   }
-  this.setState({ posArrive: arrivePos, posDepart : departPos, changePos: !this.state.changePos, rota : rotate, sens : swapSens})
+
+  this.setState({ posArrive: { x : arrivePosX, y: arrivePosY }, posDepart : { x: departPosX, y: departPosY }, changePos: !this.state.changePos, rota : rotate, sens : swapSens})
 }
+
+  renderTab = ( tab ) => {
+    const { posDepart, posArrive, textOrly, sens, price, rota } = this.state
+    if (tab === 1)
+      return (<div className='formSelect' ref='arrive' style={{ transform: `translate(${posArrive.x}px, ${posArrive.y}px)` }}>
+        <SelectForm
+          type= { 'text' }
+          name={ sens[1] }
+          ref={ 'Value'+sens[1] }
+          options={[""]}
+          img={ position }
+          styleclass = {'fc-white'}
+          value={ this.handleValue } />
+      </div>)
+    else return (<div
+      className='destination'
+      name={ sens[1] }
+      ref='arrive'
+      style={{ transform: `translate(${posArrive.x}px, ${posArrive.y}px)`, textAlign : textOrly }}>
+      <img className='orly' src={ orly } alt='plane-icon'/>
+      <span> AÉROPORT </span><span className='font-black'>ORLY</span>
+    </div>)
+  }
+
+
   render(){
     const { posDepart, posArrive, textOrly, sens, price, rota } = this.state
     let blockArrive, type = 'select'
     if ( this.props.tabActive === 1 ) {
-      type = 'text'
-        blockArrive = <div className='formSelect' ref='arrive' style={{ transform: 'translateX('+posArrive+'px)' }}>
-          <SelectForm
-            type= { type }
-            name={ sens[1] }
-            ref={ 'Value'+sens[1] }
-            options={[""]}
-            img={ position }
-            styleclass = {'fc-white'}
-            value={ this.handleValue } />
-        </div>
+      type= 'text'
+      blockArrive = this.renderTab(this.props.tabActive)
     }
     else {
       type = 'select'
-      blockArrive = <div
-        className='destination'
-        name={sens[1]}
-        ref='arrive'
-        style={{ transform: 'translateX('+ posArrive +'px)', textAlign : textOrly }}>
-        <img className='orly' src={ orly } alt='plane-icon'/>
-        <span> AÉROPORT </span><span className='font-black'>ORLY</span>
-      </div>
+      blockArrive = this.renderTab(this.props.tabActive)
     }
       return (
         <div className='container__bottom__inner' ref='formcontainer'>
-          <div className='formSelect' ref={'depart'} style={{ transform: 'translateX('+posDepart+'px)' }}>
+          <div className='formSelect' ref={ 'depart' } style={{ transform: `translate(${posDepart.x}px, ${posDepart.y}px)` }}>
             <SelectForm
               name={ sens[0] }
               type = { type }
@@ -136,7 +173,7 @@ changeSens = () => {
               type='circle'
               rota={ rota }
               onClick={ this.props.action } />
-            {blockArrive}
+            { this.renderTab(this.props.tabActive) }
             <Buttons action={ this.getValidation } text={ price } opt="price" className='round-droit font-black'/>
         </div>
       )

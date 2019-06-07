@@ -18,6 +18,7 @@ body {
 
 .App {
   text-align: center;
+  @include font("Circular Air-Bold", 20, null, $darkblue)
 }
 
 .App-logo {
@@ -27,6 +28,9 @@ body {
 .App-header {
   background-color: #222;
   height: 150px;
+  @media screen and (max-width: 740px){
+    padding: 2px;
+  }
   padding: 20px;
   color: white;
 }
@@ -57,18 +61,28 @@ body {
   position: relative;
   top: 4.5%;
   z-index: 1;
-  width: 60%;
+  @media screen and (min-width: 900px){
+    width: 60%;
+  }
+  @media screen and (max-width: 900px){
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   height: 82%;
   margin: auto;
   &__header{
     height: 7%;
     text-align: left;
     color: white;
+    z-index: 1;
+    // position: sticky;
+    // top:5px;
   }
   &__body{
     @include center;
     & .sentence {
-      @include font("Circular Air-Bold", 3.5vw, 700, white)
+      @include font("Circular Air-Bold", calc(3vw + 10px), 700, white)
     }
     & .tabForm{
       display: block;
@@ -96,6 +110,10 @@ body {
     top: 5em;
     text-align: center;
     &__inner{
+      @media screen and (max-width: 780px ){
+        display: flex;
+        flex-direction: column;
+      }
       position: relative;
       @include font("Circular Air-Book", null, null, white)
       text-align: left;
@@ -116,7 +134,8 @@ body {
 
 .page{
   height: 100%;
-  width: 100%
+  width: 100%;
+  min-height: 480px;
 }
 
 .logo{
@@ -146,11 +165,16 @@ body {
   background-size: 100% 130%
 }
 
-.screen-dark{
+div.TopPage:before{
+  content :'';
   position: absolute;
+  z-index: 0;
   top:0;
   left: 0;
-  background-color: rgba(62,107,141,0.75)
+  background-color: rgba(62,107,141,0.75);
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
 }
 
 .language{
@@ -213,4 +237,8 @@ body {
       }
     }
   }
+}
+
+.sticky {
+  // box-shadow: 0px 1px 5px rgba(80,80,80,0.8) ;
 }

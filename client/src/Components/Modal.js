@@ -9,7 +9,6 @@ class Modal extends Component {
       firebase.ui.start('#googleSignIn', auth.uiConfig);
     }
   }
-
   render(){
     // Render nothing if the "show" prop is false
     if(!this.props.show) {
@@ -17,7 +16,7 @@ class Modal extends Component {
     }
     return (
       <div className="backdrop"  style={backdropStyle}>
-      <div style={backdropStyle} onClick={this.props.onClose}></div>
+      <div style={ backdropStyle } onClick={ this.props.onClose }></div>
         <div className="modal"  style={modalStyle} >
           { this.props.children }
             <span className='modal--close pointer hidden' onClick={this.props.onClose}>

@@ -19,7 +19,7 @@ class TextInput extends Component {
   }
 
   handleBlur = (e) => {
-    console.log(e.target);
+    // console.log(e.target);
     if(e.target.value !== '' || e.target.required === false)
       {
         this.setState({ valide : 'valide' })
@@ -30,21 +30,22 @@ class TextInput extends Component {
   }
 
   render(){
-    console.log(this.props)
+
     switch (this.props.typeInput) {
       case 'text-tel' :
         return (
             <PhoneInput inputClassName={this.state.valide+' ct-s-7 font-book fs-norm '+this.props.className} className={' ct-s-5 '+this.props.className} value={this.state.phone} onChange={ phone => this.setState({phone}) } onBlur={ () => this.handlePhone(this.state.phone) }/>
         )
       default:
-        return ( <div className={this.state.valide +' TextInput font-book fs-norm ct-s-5 '+this.props.className } >
-          <input
-          required={ this.props.required }
-          name={ this.props.name }
-          onBlur={ this.handleBlur }
-          type="text"
-          placeholder={ this.props.placeholder }
-          defaultValue = { this.props.value } />
+        return (
+          <div className={this.state.valide +' TextInput font-book fs-norm ct-s-5 '+this.props.className } >
+            <input
+            required={ this.props.required }
+            name={ this.props.name }
+            onBlur={ this.handleBlur }
+            type="text"
+            placeholder={ this.props.placeholder }
+            defaultValue = { this.props.value } />
           </div>
          )
     }

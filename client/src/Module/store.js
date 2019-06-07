@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import middlewareForm from './middleware/middleware'
 import rootReducer from './reducers'
-import langage from './langage'
+import langage from './langage.json'
 
 const initialState = {
   lang : langage['fr'],

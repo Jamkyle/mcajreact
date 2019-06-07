@@ -14,7 +14,7 @@
   src: url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.eot?") format("eot"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.ttf") format("truetype"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.woff") format("woff"), url("../assets/fonts/Circular Air Web/Archive/Circular Air-Black.svg#Circular_Air-Black") format("svg"); }
 
 .fs-norm {
-  font-size: 2vmin; }
+  font-size: 1em; }
   .fs-norm-g {
     font-size: 1em; }
 

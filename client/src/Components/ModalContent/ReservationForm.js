@@ -25,8 +25,6 @@ class ReservationForm extends Component{
 
   }
 
-
-
   onSubmit = () =>{
 
     this.props.sendData(this.state.data)
@@ -62,7 +60,9 @@ class ReservationForm extends Component{
   render(){
     const { selPlaces } =  this.state
     const { DataForm, lang } = this.props
-    let form = [<Profil selPlaces={selPlaces} data={{...DataForm, ...this.state.data}} getData={this.getData} onSubmit={ ()=> this.toStep(1) } tabActive={this.props.tabActive}/>, <Paiement {...this.props} {...this.state} action={ () => this.toStep(1) }/>, <Response {...this.props} {...this.state}  />]
+    // var inputs = [{name:'LastName', placeholder:'Nom', required:true},{name:'FirstName', placeholder:'Prenom', required:true},{name:'CompagnyName', placeholder:'Nom de la Société (optionnel)', required:false}, {name:'email', placeholder:'Adresse de messagerie', required:true}]// les champs du formulaire
+    var inputs = [{name:'LastName', placeholder:'Nom'},{name:'FirstName', placeholder:'Prenom'},{name:'CompagnyName', placeholder:'Nom de la Société (optionnel)', required:false}, {name:'email', placeholder:'Adresse de messagerie'}]// les champs du formulaire
+    let form = [<Profil fields={inputs} selPlaces={selPlaces} data={{...DataForm, ...this.state.data}} getData={this.getData} onSubmit={ ()=> this.toStep(1) } tabActive={this.props.tabActive}/>, <Paiement {...this.props} {...this.state} action={ () => this.toStep(1) }/>, <Response {...this.props} {...this.state}  />]
     return(
       <div>
         <span style={{float : 'left', cursor: 'pointer'}} onClick={ ()=> this.toStep(-1) } >{this.state.step === 1 && ' < retour '}</span>

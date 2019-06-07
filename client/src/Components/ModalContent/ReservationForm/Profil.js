@@ -18,10 +18,9 @@ const Profil = ( props ) => {
           { props.tabActive === 0 && <SelectForm options={ props.selPlaces } name='place' type='select' value={ props.data.place }/> }
         </div>
         { (props.tabActive === 0) && <Progressbar /> }
-        <TextInput className='cl-l-1' name='LastName' required='true' placeholder='Nom' onBlur={ props.getData } style={{color:"#82898d"}} value={ props.data.LastName }/>
-        <TextInput className='cl-r-1' name='FirstName' required='true' placeholder='Prénom' onBlur={ props.getData } value={ props.data.FirstName }/>
-        <TextInput className='cl-l-1' name='CompagnyName' placeholder='Nom de la Société (optionnel)' onBlur={ props.getData } value={ props.data.CompagnyName }/>
-        <TextInput className='cl-r-1' name='email' required='true' placeholder='Adresse de messagerie' onBlur={ props.getData } value={ props.data.email }/>
+        { props.fields.map( (input, key) => {
+          return <TextInput className='cl-l-1' key={key} name={input.name} required={input.required === false ? false : true} placeholder={input.placeholder} onBlur={ props.getData } value={ props.data[input.name]}/>
+        }) }
         <TextInput className='cl-l-1' typeInput='text-tel' required='true' name='phoneNum' placeholder='X XX XX XX XX' onBlur={ props.getData } value={ props.data.phoneNum }/>
       </div>
       <div style={{textAlign:'center'}}>

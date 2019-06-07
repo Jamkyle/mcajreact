@@ -1,9 +1,9 @@
 const generateFact = require('./generatefact')
-
-module.exports = (db, data, price) => {
-
-  var ref = db.ref("/Courses");
-
-  ref.push({...data, price : parseInt(price/100)});
-  generateFact({...data, price : parseInt(price/100)})
+const db = require('./firebase').database()
+module.exports = (data, price, id) => {
+  console.log('customer id: '+id);
+  var ref = db.ref("/Courses"); // db firebase
+  // regroupe les info de la charge
+  ref.push( {...data, customerId : id,  price : parseFloat(price/100)} );
+  generateFact( {...data, price : parseFloat(price/100)} )
 }

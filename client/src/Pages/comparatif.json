@@ -1,0 +1,30 @@
+{
+  "vtc" : {
+    "price" : "35€",
+    "alt":"vtclogo",
+    "details" : ["15 à 20 min","place assise", "tarif à partir de"],
+    "img" : "bg-vtc"
+  },
+  "taxi" : {
+    "price" : "35€",
+    "alt":"taxilogo",
+    "details" : ["15 à 20 min","Selon disponibilité"],
+    "img" : "bg-taxi"
+  },
+  "bus" : {
+    "price" : "8€",
+    "alt":"buslogo",
+    "details" : ["15 à 20 min","place assise non garantie", "correspondance éloignée"],
+    "img" : ""
+  },
+  "tram" : {
+    "price" : "12€",
+    "details" : ["15 à 20 min","nombreuses correspondances"],
+    "img" : ""
+  },
+  "vroomcab" : {
+    "price" : "12.5€",
+    "details" : ["Rdv défini","place assurée","Allez direct"],
+    "img" : ""
+  }
+}
