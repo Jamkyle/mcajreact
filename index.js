@@ -43,6 +43,7 @@ app.post("/charge", (req, res) => {
   // console.log(req.body);
   var amount = (req.body.data.price).replace(',','.') * 100
   var customer = ''
+
   if (req.body.data.active === 0) { // test la formule 12.5€
     let prixInt = 1250
     let placesInt = req.body.data.place

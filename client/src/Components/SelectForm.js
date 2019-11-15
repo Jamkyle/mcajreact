@@ -31,6 +31,7 @@ class SelectForm extends Component{
 
   componentDidMount(){
     const { lang } = this.props.state
+    const { sendData, name } = this.props
     mapboxgl.accessToken = 'pk.eyJ1IjoiamFta3lsZSIsImEiOiJjanZ3dnBnd3kwY2R2M3lyeHplZHR2dmZlIn0.rXSLym6ex6vIvUEwWTbFAw';
     this.map = new mapboxgl.Map({
                   container: 'map',
@@ -45,16 +46,21 @@ class SelectForm extends Component{
       countries: 'fr',
       placeholder : lang.form.select[this.props.name],
       getItemValue: (val) => {
+        // console.log(val.place_name.split(',').splice(-4));
+        console.log(val.geometry.coordinates);
+        obj[`coordinates${name}`] = val.geometry.coordinates
+        sendData({...obj})
         this.getData(val.place_name)
-        return val.place_name
+        return val.place_name.split(',').splice(-4)
       },
       render : function(item) {
         // extract the item's maki icon or use a default
         var maki = item.properties.maki || 'marker';
         var res = item.place_name.split(',');
-        return "<div class='geocoder-dropdown-item'><div class='mapboxgl-ctrl-geocoder--suggestion-title'><img class='geocoder-dropdown-icon' src='https://unpkg.com/@mapbox/maki@6.1.0/icons/" + maki + "-15.svg'><span class='geocoder-dropdown-text'>" + res[0] + "</span></div><div class='mapboxgl-ctrl-geocoder--suggestion-address'>" + res.splice(1, res.length).join(',') + "</div></div>";
+        return "<div class='geocoder-dropdown-item'><div class='mapboxgl-ctrl-geocoder--suggestion-title'><img class='geocoder-dropdown-icon' src='https://unpkg.com/@mapbox/maki@6.1.0/icons/" + maki + "-15.svg'><span class='geocoder-dropdown-text'>" +res[0]+ "</span></div><div class='mapboxgl-ctrl-geocoder--suggestion-address'>" + res.splice(1, res.length).join(',') + "</div></div>";
       },
     })
+
 
     if( this.props.type !== 'select' ){
       this.refs[ 'select-'+this.props.name ].appendChild(this.geocoder.onAdd(this.map))
@@ -70,7 +76,9 @@ class SelectForm extends Component{
 
   componentDidUpdate(nextProps){
     // if(nextProps.name === 'depart' && this.props.name === 'depart')
+  
       if (nextProps.type !== this.props.type) {
+
         if(this.props.type !== 'select'){
           // this.autocomplete = new window.google.maps.places.Autocomplete(this.refs['select-'+this.props.name], mapOption )
           // this.autocomplete.addListener('place_changed', () => this.getData(this.refs['select-'+this.props.name].value) );
@@ -80,6 +88,10 @@ class SelectForm extends Component{
         let obj = {}
         obj[this.props.name] = value
         this.props.sendData({ ...obj })
+        // this.geocoder.MapboxGeocoder({
+        //   placeholder: this.props.state.lang.form.select[this.props.name]
+        // })
+
       }
 
     // if(nextProps.name === 'arrive' && this.props.name === 'arrive')
@@ -93,6 +105,7 @@ class SelectForm extends Component{
 
   render(){
     const { lang } = this.props.state
+
     const options = this.props.options.map( (e,i) => {
       if(this.props.name === 'place') return <Option key={e+i} value={e}>{e}</Option>
       else return <option key={e+i} value={e}>{e}</option>

@@ -1,0 +1,28 @@
+{
+  "informations" : {
+    "vroomcab" : [{
+      "text":"Condition Générales",
+      "lien" : "cgu.html"
+      }
+    ],
+    "Information Pratique" : [{
+      "text" : "Point de rendez vous",
+      "lien" : "#"
+    },
+    {
+      "text" : "Le transfert partagé",
+      "lien" : "#comparatif"
+    }
+  ],
+    "Service Client" : [{
+      "text" : "Contactez nous",
+      "lien" : "#"
+      },
+      {
+        "text" : "FAQ",
+        "lien" : "#"
+      }
+    ]
+  },
+  "copyright" : "Vroomcab by M'Car'J / Adresse : 69, rue de la glacière , 75013 Paris, France / Appel : 06.29.20.22.51 / https://www.vroomcab.fr"
+}

@@ -67,7 +67,7 @@ class DatePick extends Component{
   }
   render(){
     var locale = window.navigator.userLanguage || window.navigator.language;
-
+    console.log(this.state.hours.hours());
     return (
       <div className='ct-h ct-s-7'>
         <DatePicker
@@ -77,7 +77,7 @@ class DatePick extends Component{
           dateFormat = { this.props.lang.form.formatDate }
           selected = { this.state.date }
           onSelect = { this.onSelect }
-          minDate={ moment() }
+          minDate={ moment().hour() < 22 ? moment() : moment().add(1, 'day')}
           maxDate={ moment().add( 2, "months" ).subtract( moment().date(), 'days' ) }
         />
         <DateTime local='fr-fr'

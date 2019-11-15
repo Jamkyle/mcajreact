@@ -1,0 +1,6 @@
+footer .content {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 5; }
+  footer .content > ul {
+    list-style: none; }

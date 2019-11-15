@@ -17,7 +17,7 @@ class Modal extends Component {
     return (
       <div className="backdrop"  style={backdropStyle}>
       <div style={ backdropStyle } onClick={ this.props.onClose }></div>
-        <div className="modal"  style={modalStyle} >
+        <div className="modal" style={modalStyle} >
           { this.props.children }
             <span className='modal--close pointer hidden' onClick={this.props.onClose}>
               x
@@ -35,8 +35,6 @@ const backdropStyle = {
   bottom: 0,
   left: 0,
   right: 0,
-
-  padding: 50
 };
 
 // The modal "window"
@@ -44,11 +42,7 @@ const modalStyle = {
   position: 'relative',
   backgroundColor: '#f7f7f7',
   zIndex: 3,
-  borderRadius: 2,
-  maxWidth: '57.6vw',
-  minHeight: '64.2vh',
-  margin: '10% auto',
-  padding: '30px 50px',
+  borderRadius: 2
 };
 
 Modal.proptypes = {

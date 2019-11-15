@@ -2,11 +2,11 @@
   position: relative;
   display: inline-block;
   height: 100%;
+  flex: 1;
   @media screen and (max-width: 700px){
     width: 100%;
     margin-bottom: 2%;
   }
-  width: 33%;
   background-color: $blue;
   border-radius: 50px;
 
@@ -49,15 +49,19 @@
     @include font("Circular Air-Bold", null, null, null);
   }
 }
+.form-item {
+  flex:1;
+  // max-width: %;
+}
 
 .destination{
   display: inline-block;
-  @media screen and (max-width: 780px){
+  @media screen and (max-width: 680px){
     width: 100%;
     margin-top: 2%;
     margin-bottom: 2%;
   }
-  width: 33%; //comment pour aligné a gauche
+  // width: 33%; //comment pour aligné a gauche
   // text-align: center;
   & .orly{
     position: relative;
@@ -216,7 +220,15 @@ input{
 
 .contain-form{
   margin: auto;
-  text-align : left;
+  text-align : center;
+  @media screen and (max-width: 780px){
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+  }
 }
 
 .check {
@@ -267,4 +279,13 @@ input{
 
 .Date {
   margin: 3%;
+}
+
+.swipe_container {
+  transition: all 0.2s;
+  display: flex;
+  flex:1;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction:row;
 }

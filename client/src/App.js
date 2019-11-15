@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Toppage from './Pages/Toppage'
 import Comparatif from './Pages/Comparatif'
+import {Footer} from './Pages/Footer'
 
 
 let lastScrollY = 0;
@@ -26,10 +27,10 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App page">
+      <div className="App">
         <Toppage scroll={ lastScrollY }/>
-        <h1 className='font-black font-color--darkblue'>Nos Avantages</h1>
         <Comparatif scroll={ lastScrollY }/>
+        <Footer/>
       </div>
     );
   }

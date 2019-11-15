@@ -47,7 +47,7 @@ export const BusSVG = (props) => {
 
 export const TramSVG = (props) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102.46 161.72" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 0 142.46 190" {...props}>
       <title>tram</title>
       <g id="Layer_2" data-name="Layer 2">
         <g id="Layer_1-2" data-name="Layer 1">
@@ -60,14 +60,16 @@ export const TramSVG = (props) => {
 
 export const VroomcabSVG = (props) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg"  width='100%' height='40px'>
+    <svg xmlns="http://www.w3.org/2000/svg"  width='100%' height='40'>
       <title>vroomcab</title>
       <text
-        fill='#fff'
-        x="0"  y="20"
-        fontFamily="Montserrat"
-        fontSize="20">
-        vroomcab
+        fill='#354b5d'
+        x="50%"  y="20"
+        className='font-black'
+        fontSize="20"
+        textAnchor="middle">
+        <tspan>vroom</tspan>
+        <tspan fill='#ff4747'>cab</tspan>
       </text>
 
     </svg>

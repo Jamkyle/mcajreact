@@ -46,31 +46,31 @@ class Toppage extends Component{
     const ModalComponent = {'resaForm' : ReservationForm, 'auth': Authpage}
     const ModalContent = ModalComponent[this.state.modal]
     return (
-      <div className='TopPage page'>
-      <div className='container'>
-        <header ref='header' className={`container__header ${ this.props.scroll > 5 && 'sticky' }` }>
-          <div className='right'>
-            <img src={ SocialNetwork.facebook } alt='facebook'/>
-            <img src={ SocialNetwork.twitter } alt='twitter'/>
-            <span onClick={ () => this.switchLang('fr') } className={ language !== 'fr' ? 'language':'' } >FR </span><span className={ language !== 'en' ? 'language':'' }onClick={ () => this.switchLang('en') } >| EN</span>
-            {/*<span name='auth' onClick={ this.toggleModal } >  { message } <Icon type="login" /></span>*/}
+        <div className='TopPage page'>
+          <div className='container'>
+          <header ref='header' className={`container__header ${ this.props.scroll > 5 && 'sticky' }` }>
+            <div className='right'>
+              <img src={ SocialNetwork.facebook } alt='facebook'/>
+              <img src={ SocialNetwork.twitter } alt='twitter'/>
+              <span onClick={ () => this.switchLang('fr') } className={ language !== 'fr' ? 'language':'' } >FR </span><span className={ language !== 'en' ? 'language':'' }onClick={ () => this.switchLang('en') } >| EN</span>
+              {/*<span name='auth' onClick={ this.toggleModal } >  { message } <Icon type="login" /></span>*/}
+            </div>
+            <span className='logo'>vroom<span style={{ color :'#ff4747' }}>cab</span></span>
+          </header>
+            <div className='container__body'>
+              <span className='sentence'>{ lang.slog }</span>
+              <div className='container__bottom'>
+                <ul className='tabForm'>{ tab }</ul>
+                <TabForm tabActive={ tabActive } modalOpen={ this.toggleModal } />
+              </div>
           </div>
-          <span className='logo'>vroom<span style={{ color :'#ff4747' }}>cab</span></span>
-        </header>
-        <div className='container__body'>
-          <span className='sentence'>{ lang.slog }</span>
-          <div className='container__bottom'>
-            <ul className='tabForm'>{ tab }</ul>
-            <TabForm tabActive={ tabActive } modalOpen={ this.toggleModal } />
-          </div>
+          <Modal show={ this.state.isOpen }
+            option={ this.state.modal }
+            onClose={ this.toggleModal }>
+            <ModalContent toggleModal={ this.toggleModal } tabActive={ tabActive } />
+          </Modal>
         </div>
       </div>
-      <Modal show={ this.state.isOpen }
-        option={ this.state.modal }
-        onClose={ this.toggleModal }>
-        <ModalContent toggleModal={ this.toggleModal } tabActive={ tabActive } />
-      </Modal>
-    </div>
     )
   }
 }

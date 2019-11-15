@@ -5,14 +5,21 @@
 }
 
 .Comparatif{
-  padding: 0 20px;
+  // padding: 0 20px;
   display: flex;
   // flex-wrap: wrap;
   justify-content: center;
-  min-height: 480px;
-	@media screen and (max-width: 600px){
+	align-items: flex-start;
+  // min-height: 480px;
+	@media screen and (max-width: 680px){
 		flex-wrap: wrap;
 	}
+}
+
+.compare {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .anime {
@@ -22,6 +29,7 @@
 	-o-animation-fill-mode: forwards;      /* Not implemented yet */
 	-ms-animation-fill-mode: forwards;     /* IE 10+ */
 	animation-fill-mode: forwards;         /* When the spec is finished */
+
 }
 
 @keyframes apparition {
@@ -36,65 +44,72 @@
 }
 
 .BoxCompare {
-  display: flex;
 	z-index: 0;
+	opacity: 0;
 	position: relative;
   align-items: center;
-	color: white;
-	box-shadow: -2px 0px 7px rgba(50,50,50,0.7);
-	@media screen and ( min-width: 900px ){
-		width: 33.3333%;
-		// margin: 5px;
+	color: $darkblue;
+	// box-shadow: -1px 1px 4px rgba(50,50,50,0.7);
+	@media screen and ( min-width: 780px ){
+		flex: 1;
+		// width: 33.3333%;
+		margin: 0 3px;
 	}
 	@media screen and (max-width: 640px){
-		width: 100%;
-		// flex-wrap: wrap;
+		// display: flex;
+		width: 50%;
+		flex-wrap: wrap;
 	}
 
 	justify-content: center;
-	&:before {
-		z-index: 1;
-		position: absolute;
-		background: rgba(62, 107, 141, 0.75);
-		opacity: 0.6;
-		width: 100%;
-		height: 100%;
-		content: '';
-	}
+	// &:before {
+	// 	z-index: 1;
+	// 	position: absolute;
+	// 	// background: rgba(62, 107, 141, 0.75);
+	// 	opacity: 0.6;
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	content: '';
+	// }
   &--container {
 		position: relative;
 		z-index: 2;
 		min-width: 100%;
 		@media screen and ( min-width: 900px ){
-			padding: 50px 12px;
+			// padding: 50px 12px;
+			padding-top: 20px
 		}
 		@media screen and ( max-width: 680px ){
 			padding:0;
 		}
-    display: flex;
-    flex-direction: row;
-		align-items: center;
+    // display: flex;
+    // flex-direction: column;
+		// align-items: center;
+		// justify-content: center;
   }
   &--title {
     color: $red
   }
   &--img {
-		flex : 1;
+		// flex : 1;
 		@media screen and (max-width: 680px){
 			flex: none;
-			width: 140px;
+			// width: 140px;
 		}
   }
   &--details{
     line-height: 100%;
 		& li {
-			text-align: justify;
 			list-style: none;
 			margin-bottom: 5px;
-
+			&::first-letter{
+				text-transform: capitalize;
+			}
 		}
 		& ul {
-			@media screen and (max-width: 640px){
+			text-align: center;
+			padding: 0;
+			@media screen and (max-width: 680px){
 				padding: 0;
 			}
 		}
@@ -105,20 +120,29 @@
 
 }
 
+.vroomcab {
+	flex: 3;
+	@media screen and (max-width: 680px){
+		// display: flex;
+		flex: none;
+		width: 100%;
+	}
+}
+
 .bg {
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	&-taxi{
-			background-image: url('../assets/img/yifei-chen-354761-unsplash.jpg');
+			// background-image: url('../assets/img/yifei-chen-354761-unsplash.jpg');
 	}
 	&-vtc{
-			background-image: url('../assets/img/why-kei-51455-unsplash.jpg');
+			// background-image: url('../assets/img/why-kei-51455-unsplash.jpg');
 	}
 	&-bus{
-			background-image: url('../assets/img/niko-lienata-1572292-unsplash.jpg');
+			// background-image: url('../assets/img/niko-lienata-1572292-unsplash.jpg');
 	}
 	&-tram{
-			background-image: url('../assets/img/alessandro-queiroz-1395574-unsplash.jpg');
+			// background-image: url('../assets/img/alessandro-queiroz-1395574-unsplash.jpg');
 	}
 }

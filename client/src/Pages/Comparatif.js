@@ -9,19 +9,28 @@ class Comparatif extends Component {
   render(){
 
     return (
-      <section className='Comparatif'>
-      {
-        Object.keys(dataCompare).map( (el, key) => {
-          let ComponentSVG = icons[`${el[0].toUpperCase() + el.slice(1)}SVG`] ;
-          return <BoxCompare
-            key={el+key}
-            src={ <ComponentSVG alt={`${el}logo`} fill='#fff' height={70} width={50}/> }
-            prix={dataCompare[el].price}
-            details={dataCompare[el].details}
-            bg={`bg-${el}`}
-          />
-        })
-      }
+      <section className='page compare' id="comparatif">
+        <div className='container'>
+          <h1 className='font-black font-color--darkblue'>Nos Avantages</h1>
+          <div className='Comparatif'>
+          {
+            Object.keys(dataCompare).map( (el, key) => {
+              let ComponentSVG = icons[`${el[0].toUpperCase() + el.slice(1)}SVG`] ;
+              return <BoxCompare
+                className={el}
+                key={el+key}
+                src={ <ComponentSVG alt={`${el}logo`} fill='#354b5d' height={70} width={50}/> }
+                prix={dataCompare[el].price}
+                details={dataCompare[el].details}
+                bg={`bg-${el}`}
+                delay={ key*100 }
+              />
+            })
+          }
+          </div>
+        </div>
+
+
 
         {/*<BoxCompare
           src={<VtcSVG alt='vtclogo' color='#fff' height={70} width={50}/>}

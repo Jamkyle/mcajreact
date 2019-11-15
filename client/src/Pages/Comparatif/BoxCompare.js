@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 
 export class BoxCompare extends React.Component {
 
-  state = { display: 'flex', opacity: 0 }
-  anime = ''
+  state = { display: 'flex'}
   componentDidMount(){
     this.topBox = this.box.getBoundingClientRect()
     if( window.scrollY > window.innerHeight - ( this.topBox.height * 2.333 ) ) this.anime = 'anime'
@@ -18,7 +17,7 @@ export class BoxCompare extends React.Component {
     const  { props } = this
 
     return (
-      <section style={ this.state } className={ this.anime+' bg BoxCompare ' + props.bg } ref={ ref => this.box = ref }>
+      <section style={ {...this.state, opacity : 0 } } style={{ animationDelay: `${props.delay}ms` }} className={ `${props.className} ${this.anime} bg BoxCompare ${props.bg}` } ref={ ref => this.box = ref }>
         <div className='BoxCompare--container'>
           <div className='BoxCompare--img'>
             { props.src }
